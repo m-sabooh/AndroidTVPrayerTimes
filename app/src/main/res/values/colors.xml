@@ -5,4 +5,6 @@
     <color name="search_opaque">#ffaa3f</color>
     <color name="selected_background">#ffaa3f</color>
     <color name="default_background">#3d3d3d</color>
+    <color name="prayer_time_background">#4CAF50</color>
+    <color name="next_prayer_highlight">#2196F3</color>
 </resources>

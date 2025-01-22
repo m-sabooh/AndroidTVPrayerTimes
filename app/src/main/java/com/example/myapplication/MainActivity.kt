@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.min
 
 class MainActivity : FragmentActivity() {
 
@@ -85,7 +85,7 @@ class MainActivity : FragmentActivity() {
 
         nextPrayerTextView.text = "Next Prayer: $nextPrayer"
         updateCountdown(currentTime, nextPrayer)
-        updatePrayerTimeProgress()
+        highlightNextPrayer(nextPrayer)
     }
 
     private fun updateCountdown(currentTime: Calendar, nextPrayer: String) {
@@ -113,47 +113,26 @@ class MainActivity : FragmentActivity() {
             val prayerTimeView = inflater.inflate(R.layout.prayer_time_item, prayerTimesContainer, false)
             val prayerNameTextView = prayerTimeView.findViewById<TextView>(R.id.prayerNameTextView)
             val prayerTimeTextView = prayerTimeView.findViewById<TextView>(R.id.prayerTimeTextView)
-            val progressView = prayerTimeView.findViewById<View>(R.id.progressView)
+            val cardView = prayerTimeView.findViewById<CardView>(R.id.prayerTimeCardView)
 
             prayerNameTextView.text = prayer
             prayerTimeTextView.text = time
 
-            prayerTimeView.tag = progressView
+            prayerTimeView.tag = cardView
             prayerTimesContainer.addView(prayerTimeView)
         }
     }
 
-    private fun updatePrayerTimeProgress() {
-        val currentTime = Calendar.getInstance()
-        val currentTimeStr = SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentTime.time)
-
-        prayerTimes.entries.forEachIndexed { index, (prayer, time) ->
+    private fun highlightNextPrayer(nextPrayer: String) {
+        prayerTimes.keys.forEachIndexed { index, prayer ->
             val prayerTimeView = prayerTimesContainer.getChildAt(index)
-            val progressView = prayerTimeView.tag as View
-            val progress = calculateProgress(currentTimeStr, time, prayerTimes.values.elementAtOrNull(index + 1) ?: prayerTimes.values.first())
-            val layoutParams = progressView.layoutParams
-            layoutParams.width = (progress * prayerTimeView.width).toInt()
-            progressView.layoutParams = layoutParams
+            val cardView = prayerTimeView.tag as CardView
+
+            if (prayer == nextPrayer) {
+                cardView.setCardBackgroundColor(ContextCompat.getColor(this, R.color.next_prayer_highlight))
+            } else {
+                cardView.setCardBackgroundColor(ContextCompat.getColor(this, R.color.prayer_time_background))
+            }
         }
-    }
-
-    private fun calculateProgress(currentTime: String, startTime: String, endTime: String): Float {
-        val current = timeToMinutes(currentTime)
-        val start = timeToMinutes(startTime)
-        var end = timeToMinutes(endTime)
-
-        if (end <= start) {
-            end += 24 * 60 // Add 24 hours if the end time is on the next day
-        }
-
-        if (current < start) return 0f
-        if (current >= end) return 1f
-
-        return min((current - start).toFloat() / (end - start), 1f)
-    }
-
-    private fun timeToMinutes(time: String): Int {
-        val (hours, minutes) = time.split(":").map { it.toInt() }
-        return hours * 60 + minutes
     }
 }
