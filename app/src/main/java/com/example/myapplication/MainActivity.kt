@@ -10,7 +10,11 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import java.text.SimpleDateFormat
-import java.util.*
+import java.time.chrono.HijrahDate
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Locale
+
 
 class MainActivity : FragmentActivity() {
 
@@ -53,7 +57,17 @@ class MainActivity : FragmentActivity() {
         prayerTimesContainer = findViewById(R.id.prayerTimesContainer)
 
         locationTextView.text = "Dubai, United Arab Emirates"
-        hijriDateTextView.text = "15 Ramadan 1444" // Replace with actual Hijri date calculation
+
+
+        // Get the current date in Hijri (Islamic) calendar format
+        val hijrahDate = HijrahDate.now()
+        // Create a formatter for the Hijri date
+        val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale("en"))
+        // Format the Hijri date using the formatter
+        val formattedHijriDate = hijrahDate.format(formatter)
+        // Display the Hijri date in the TextView
+        hijriDateTextView.text = formattedHijriDate
+
 
         setupPrayerTimeViews()
     }
