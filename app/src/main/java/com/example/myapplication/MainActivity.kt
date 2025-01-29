@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -44,6 +45,9 @@ class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Prevent the screen from going to sleep
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         clockTextView = findViewById(R.id.clockTextView)
         dateTextView = findViewById(R.id.dateTextView)
@@ -88,11 +92,13 @@ class MainActivity : FragmentActivity() {
         val dateSdf = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
         dateTextView.text = dateSdf.format(currentTime.time)
 
-        updateNextPrayer(currentTime)
+        if(prayerTimes.isNotEmpty()){
+            updateNextPrayer(currentTime)
+        }
     }
 
     private fun updateNextPrayer(currentTime: Calendar) {
-        if (prayerTimes.isEmpty()) return // Skip if prayer times haven't been fetched yet
+//        if (prayerTimes.isEmpty()) return // Skip if prayer times haven't been fetched yet
 
         val currentTimeStr = SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentTime.time)
         val nextPrayer = prayerTimes.entries.find { it.value > currentTimeStr }?.key ?: prayerTimes.keys.first()
