@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 import PrayerTimesApi
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,11 +9,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,8 +19,6 @@ import java.time.chrono.HijrahDate
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
-import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.util.Log
 
 
 class MainActivity : FragmentActivity() {
@@ -36,7 +30,6 @@ class MainActivity : FragmentActivity() {
     private lateinit var countdownTextView: TextView
     private lateinit var locationTextView: TextView
     private lateinit var prayerTimesContainer: LinearLayout
-//    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val prayerTimes = mutableMapOf<String, String>()
 
@@ -47,16 +40,6 @@ class MainActivity : FragmentActivity() {
             handler.postDelayed(this, 1000)
         }
     }
-
-    // Mock prayer times (replace with actual data in production)
-//    private val prayerTimes = mapOf(
-//        "Fajr" to "04:30",
-//        "Sunrise" to "05:45",
-//        "Dhuhr" to "12:30",
-//        "Asr" to "15:45",
-//        "Maghrib" to "18:15",
-//        "Isha" to "19:45"
-//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +65,8 @@ class MainActivity : FragmentActivity() {
         // Display the Hijri date in the TextView
         hijriDateTextView.text = formattedHijriDate
 
-//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         fetchPrayerTimes("Mezitli", "Turkey")
+        //setupPrayerTimeViews()
 
     }
 
@@ -109,6 +92,8 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun updateNextPrayer(currentTime: Calendar) {
+        if (prayerTimes.isEmpty()) return // Skip if prayer times haven't been fetched yet
+
         val currentTimeStr = SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentTime.time)
         val nextPrayer = prayerTimes.entries.find { it.value > currentTimeStr }?.key ?: prayerTimes.keys.first()
 
@@ -165,36 +150,6 @@ class MainActivity : FragmentActivity() {
         }
     }
 
-//    private fun getLocationAndFetchPrayerTimes() {
-//        if (ActivityCompat.checkSelfPermission(
-//                this, ACCESS_FINE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                this, ACCESS_FINE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED
-//        ) {
-//            // Request location permissions if not granted
-//            ActivityCompat.requestPermissions(
-//                this,
-//                arrayOf(ACCESS_FINE_LOCATION),
-//                1001
-//            )
-//            return
-//        }
-//
-//        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-////            if (location != null) {
-////                val city = "Mezitli" // You can use reverse geocoding to get city name from lat/long
-////                val country = "Turkey"
-////                fetchPrayerTimes(city, country)
-////            } else {
-////                Toast.makeText(this, "Unable to get location", Toast.LENGTH_SHORT).show()
-////            }
-//            val city = "Mezitli" // You can use reverse geocoding to get city name from lat/long
-//            val country = "Turkey"
-//            fetchPrayerTimes(city, country)
-//        }
-//    }
-
     private fun fetchPrayerTimes(city: String, country: String) {
         val api = RetrofitClient.getInstance().create(PrayerTimesApi::class.java)
         val call = api.getPrayerTimes(city, country)
@@ -214,8 +169,8 @@ class MainActivity : FragmentActivity() {
                         prayerTimes["Maghrib"] = it.Maghrib
                         prayerTimes["Isha"] = it.Isha
 
-                        setupPrayerTimeViews()
                     }
+                    setupPrayerTimeViews()
                 }
             }
 
@@ -224,18 +179,5 @@ class MainActivity : FragmentActivity() {
             }
         })
     }
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if (requestCode == 1001 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            getLocationAndFetchPrayerTimes()
-//        } else {
-//            Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
-//        }
-//    }
 
 }
