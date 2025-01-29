@@ -71,7 +71,248 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal">
+
+
+                <FrameLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fajrTimeCardView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/prayer_time_background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:text="@string/fajr"/>
+                            <TextView
+                                android:id="@+id/fajrTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/white"
+                                android:layout_marginTop="4dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+                <FrameLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/sunriseTimeCardView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/prayer_time_background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:text="@string/sunrise"/>
+                            <TextView
+                                android:id="@+id/sunriseTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/white"
+                                android:layout_marginTop="4dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout><FrameLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/dhuhrTimeCardView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/prayer_time_background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:text="@string/dhuhr"/>
+                            <TextView
+                                android:id="@+id/dhuhrTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/white"
+                                android:layout_marginTop="4dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout><FrameLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/asrTimeCardView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/prayer_time_background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:text="@string/asr"/>
+                            <TextView
+                                android:id="@+id/asrTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/white"
+                                android:layout_marginTop="4dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout><FrameLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/maghribTimeCardView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/prayer_time_background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:text="@string/maghrib"/>
+                            <TextView
+                                android:id="@+id/maghribTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/white"
+                                android:layout_marginTop="4dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+                <FrameLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/ishaTimeCardView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/prayer_time_background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:text="@string/isha"/>
+
+                            <TextView
+                                android:id="@+id/ishaTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/white"
+                                android:layout_marginTop="4dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+            </LinearLayout>
 
         </HorizontalScrollView>
 
